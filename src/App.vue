@@ -1,85 +1,79 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import { ref } from 'vue'
+import draggable from 'vuedraggable' // <-- Import ini
+
+const lists = ref([
+  { id: 1, title: 'Ideas', cards: [
+    { id: 101, text: 'Beli Ceri' },
+    { id: 102, text: 'Moodboard Cherry Task' }
+  ], isAdding: false, newTask: '' },
+  { id: 2, title: 'In Progress', cards: [
+    { id: 201, text: 'Coding UI' }
+  ], isAdding: false, newTask: '' },
+  { id: 3, title: 'Finished', cards: [
+    { id: 301, text: 'Setup Vite' }
+  ], isAdding: false, newTask: '' }
+])
+
+const addCard = (list) => {
+  if (list.newTask.trim() !== '') {
+    // Kita pakai object supaya draggable lebih stabil
+    list.cards.push({ id: Date.now(), text: list.newTask })
+    list.newTask = ''
+    list.isAdding = false
+  }
+}
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <div class="min-h-screen bg-cosmic p-8 font-sans">
+    
+    <header class="mb-12 flex items-center justify-center gap-3">
+      <div class="w-10 h-10 bg-sangria rounded-full shadow-lg"></div> 
+      <h1 class="text-4xl font-extrabold text-sangria tracking-tighter">CHERRY TASK</h1>
+    </header>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+    <main class="flex gap-6 overflow-x-auto pb-10 items-start">
+      <div v-for="list in lists" :key="list.id" 
+           class="bg-white w-80 shrink-0 rounded-3xl shadow-xl overflow-hidden border border-gray-100">
+        
+        <div class="bg-cornflower p-4">
+          <h2 class="font-black text-white uppercase text-sm tracking-widest">{{ list.title }}</h2>
+        </div>
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
+        <div class="p-5">
+          <draggable 
+            v-model="list.cards" 
+            group="tasks" 
+            item-key="id"
+            ghost-class="opacity-50"
+            drag-class="rotate-3"
+            class="space-y-4 min-h-[50px]"
+          >
+            <template #item="{ element }">
+              <div class="bg-cosmic p-4 rounded-2xl border-l-4 border-sangria shadow-sm text-gray-800 font-medium cursor-grab active:cursor-grabbing">
+                {{ element.text }}
+              </div>
+            </template>
+          </draggable>
 
-  <RouterView />
+          <div v-if="list.isAdding" class="mt-4">
+            <textarea v-model="list.newTask" 
+                      placeholder="Apa rencanamu?" 
+                      class="w-full p-3 rounded-2xl border-2 border-cornflower focus:outline-none text-sm"
+                      rows="2"></textarea>
+            <div class="flex gap-2 mt-2">
+              <button @click="addCard(list)" class="bg-sangria text-white px-5 py-2 rounded-xl text-xs font-bold uppercase">Tambah</button>
+              <button @click="list.isAdding = false" class="text-gray-400 text-xs font-bold uppercase">Batal</button>
+            </div>
+          </div>
+
+          <button v-else @click="list.isAdding = true" 
+                  class="mt-6 w-full py-3 text-xs font-black uppercase text-cornflower border-2 border-dashed border-cornflower/30 rounded-2xl hover:bg-cornflower/5 transition">
+            + New Task
+          </button>
+        </div>
+      </div>
+    </main>
+  </div>
 </template>
-
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
-</style>
