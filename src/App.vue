@@ -15,7 +15,7 @@
     <section id="hero">
       <div class="hero-inner">
         <div class="hero-left">
-          <p class="hero-eyebrow">Fresh Graduate · SMK RPL · {{ location }}</p>
+          <p class="hero-eyebrow">Fresh Graduate · Junior Software Developer · {{ location }}</p>
           <h1 class="hero-name">
             {{ name.split(' ')[0] }}<br />
             <em>{{ name.split(' ').slice(1).join(' ') || 'Developer' }}</em>
@@ -35,7 +35,7 @@
         <div class="hero-right">
           <div class="photo-frame">
             <!-- Ganti src dengan path foto kamu, contoh: src="/src/assets/foto.jpg" -->
-            <img src="https://placehold.co/400x480/e8e7e3/7a7875?text=Foto+Kamu" alt="Foto Profil" class="hero-photo" />
+         <img :src="'./src/assets/self.png'" alt="Foto Profil" class="hero-photo" />
             <div class="photo-badge">
               <span class="badge-dot"></span>
               Tersedia untuk hire
@@ -53,7 +53,7 @@
         <div class="about-text fade-in">
           <h2>Membangun solusi digital yang <em>nyata & berdampak.</em></h2>
           <p>{{ about }}</p>
-          <p>Selain coding, aku juga menjalankan bisnis AI photo editing dengan <strong>500+ klien</strong> — gabungan antara kreativitas dan teknologi yang aku geluti setiap hari.</p>
+          <p>Selain coding, saya juga menjalankan bisnis AI photo editing dengan <strong>500+ klien</strong> — gabungan antara kreativitas dan teknologi yang saya geluti setiap hari.</p>
         </div>
         <div class="about-details fade-in">
           <div v-for="d in details" :key="d.label" class="detail-row">
@@ -134,25 +134,25 @@
           <p class="contact-sub">Terbuka untuk peluang kerja, freelance, dan kolaborasi proyek. Saya juga open untuk klien AI photo editing!</p>
         </div>
         <div class="contact-cards fade-in">
-          <a class="contact-card" href="mailto:hello@example.com">
+          <a class="contact-card" href="mailto:helmarezqikao@gmail.com">
             <span class="cc-icon">✉</span>
             <span class="cc-label">Email</span>
-            <span class="cc-value">hello@example.com</span>
+            <span class="cc-value">helmarezqika@gmail.com</span>
           </a>
-          <a class="contact-card" href="#">
+          <a class="contact-card" href="https://www.linkedin.com/in/helma-liana-rezqika-065832291/">
             <span class="cc-icon">in</span>
             <span class="cc-label">LinkedIn</span>
-            <span class="cc-value">linkedin.com/in/namakamu</span>
+            <span class="cc-value">helmalianarezqika</span>
           </a>
-          <a class="contact-card" href="#">
+          <a class="contact-card" href="https://github.com/elcodingversion">
             <span class="cc-icon">&lt;/&gt;</span>
             <span class="cc-label">GitHub</span>
-            <span class="cc-value">github.com/namakamu</span>
+            <span class="cc-value">github.com/elcodingversion</span>
           </a>
-          <a class="contact-card" href="#">
+          <a class="contact-card" href="https://www.instagram.com/helmarezqika/">
             <span class="cc-icon">ig</span>
             <span class="cc-label">Instagram</span>
-            <span class="cc-value">@namakamu</span>
+            <span class="cc-value">helmarezqika</span>
           </a>
         </div>
       </div>
@@ -170,9 +170,9 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 
 // ── EDIT DATA DI SINI ─────────────────────────────────
-const name = ref('Nama Kamu')
+const name = ref('Helma Liana Rezqika')
 const location = ref('Purwakarta, Jawa Barat')
-const tagline = ref('Full Stack Developer & AI Enthusiast. Saya membangun aplikasi web dengan Laravel & Vue.js, sekaligus menjalankan bisnis AI photo editing dengan 500+ klien aktif.')
+const tagline = ref('Web Developer & AI Enthusiast. Saya membangun aplikasi web dengan Laravel & Vue.js, sekaligus menjalankan bisnis AI photo editing dengan 500+ klien aktif.')
 const about = ref('Fresh graduate SMK jurusan RPL dengan pengalaman nyata di dunia industri. Selama PKL di PT. Pratama Solusi Teknologi, saya terlibat langsung dalam pengembangan sistem manajemen siswa berbasis Laravel yang mendapat nilai rata-rata 87. Saya percaya teknologi adalah alat untuk menciptakan dampak nyata.')
 
 const navLinks = [
@@ -186,24 +186,23 @@ const navLinks = [
 const stats = [
   { num: '3+', label: 'Proyek Selesai' },
   { num: '500+', label: 'Klien AI Foto' },
-  { num: '87', label: 'Nilai PKL' },
   { num: '3 bln', label: 'Pengalaman Industri' },
 ]
 
 const details = [
   { label: 'Lokasi', value: 'Purwakarta, Jawa Barat' },
-  { label: 'Pendidikan', value: 'SMK — Rekayasa Perangkat Lunak' },
+  { label: 'Pendidikan', value: 'SMKN 2 Purwakarta — Rekayasa Perangkat Lunak' },
   { label: 'Status', value: 'Fresh Graduate · Open to Work' },
-  { label: 'Spesialisasi', value: 'Full Stack · Laravel · Vue.js' },
+  { label: 'Spesialisasi', value: 'Full Stack · Laravel · Vue.js · Boostsrap· PHP' },
   { label: 'Bisnis', value: 'AI Photo Editing · 500+ Klien' },
-  { label: 'Tools AI', value: 'Gemini AI · Google Flow' },
+  { label: 'Tools AI', value: 'Gemini AI · Google Flow · Claude Ai' },
 ]
 
 const skillCats = [
   {
     name: 'Backend',
     title: 'Server & Database',
-    tags: ['Laravel', 'PHP', 'MySQL', 'REST API', 'MVC Pattern', 'Eloquent ORM'],
+    tags: ['Laravel', 'PHP', 'MySQL', 'MVC Pattern', 'Eloquent ORM'],
   },
   {
     name: 'Frontend',
@@ -213,12 +212,18 @@ const skillCats = [
   {
     name: 'AI & Creative',
     title: 'AI & Desain',
-    tags: ['Gemini AI', 'Google Flow', 'AI Photo Editing', 'Prompt Engineering', 'Adobe Photoshop'],
+    tags: ['Gemini AI', 'Google Flow', 'AI Photo Editing','Prompt Engineering','Canva' ],
   },
   {
     name: 'Tools',
     title: 'Workflow & Dev',
-    tags: ['Git', 'GitHub', 'VS Code', 'Laragon', 'Figma', 'Postman'],
+    tags: ['Git', 'GitHub', 'VS Code', 'Laragon', 'Figma', 'XAMPP','Antigravity'],
+  },
+
+  {
+    name: 'Productivty',
+    title: 'Office',
+    tags: ['MS Office', 'Google Docs', 'Spreadsheets'],
   },
 ]
 
@@ -259,8 +264,8 @@ const projects = [
 
 const experiences = [
   {
-    period: 'Des 2024 — Feb 2025',
-    duration: '3 Bulan',
+    period: 'Jun 2025 — Nov 2025',
+    duration: '4 Bulan',
     role: 'Full Stack Developer (PKL)',
     company: 'PT. Pratama Solusi Teknologi',
     badge: 'Nilai 87',
@@ -276,11 +281,20 @@ const experiences = [
     desc: 'Membangun dan menjalankan bisnis jasa editing foto berbasis AI secara mandiri. Memanfaatkan Gemini AI dan Google Flow untuk menghasilkan hasil edit berkualitas tinggi dengan efisiensi tinggi. Berhasil menangani lebih dari 500 klien.',
     tags: ['Gemini AI', 'Google Flow', 'Entrepreneurship', 'Client Management'],
   },
+
+   {
+    period: '2024 — 2025',
+    duration: 'Finished',
+    role: 'Pengurus & Pemateri Ekstrakulikuler Programming X-TIK SMKN 2 Purwakarta',
+    company: 'Sekolah · Organisasi',
+    desc: 'Menjadi pemateri aktif, menjelaskan konsep dasar pemrograman, algoritma, dan pengembangan web kepada siswa. Membantu siswa memahami teknologi terkini seperti AI dan mendorong minat mereka dalam bidang teknologi.',
+    tags: ['Vscode', 'Java Script', 'HTML', 'CSS'],
+  },
   {
     period: '2022 — 2025',
     duration: '3 Tahun',
     role: 'Siswa RPL',
-    company: 'SMK — Rekayasa Perangkat Lunak · Purwakarta',
+    company: 'SMK Negeri 2 Purwakarta — Rekayasa Perangkat Lunak · Purwakarta',
     badge: null,
     desc: 'Menempuh pendidikan jurusan Rekayasa Perangkat Lunak dengan fokus pada pengembangan web. Mengerjakan berbagai proyek praktik mulai dari sistem perpustakaan, e-commerce, hingga sistem manajemen.',
     tags: ['Web Development', 'PHP', 'Laravel', 'Database', 'OOP'],
